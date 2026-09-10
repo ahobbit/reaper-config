@@ -52,10 +52,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          gh release delete latest --yes --cleanup-tag 2>/dev/null || true
           gh release create latest dist/*.zip \
             --title "Latest Automated Build" \
-            --notes "Automated build from commit ${{ github.sha }}. Download the ZIP for your operating system and follow README-FIRST.txt inside." \
-            --clobber
+            --notes "Automated build from commit ${{ github.sha }}. Download the ZIP for your operating system and follow README-FIRST.txt inside."
 
       - name: Publish Tagged Release
         if: startsWith(github.ref, 'refs/tags/v')
