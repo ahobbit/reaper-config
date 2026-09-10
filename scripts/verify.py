@@ -7,7 +7,7 @@ lock=json.loads((r/'dependencies.lock.json').read_text())
 for platform in ['windows','macos']:
     profile=r/'platforms'/platform
     cfg=configparser.ConfigParser(interpolation=None);cfg.read(profile/'reaper.ini')
-    for key,value in {'autosaveint':'1','workbufmsex':'600','prebufperb':'50','renderbsnew':'1024','vuupdfreq':'30','tcpalign':'787'}.items():assert cfg['reaper'][key]==value,(platform,key)
+    for key,value in {'autosaveint':'1','workbufmsex':'600','prebufperb':'50','renderbsnew':'1024','vuupdfreq':'30','tcpalign':'787','transport_dock':'1','transport_dock_pos':'1','transflags':'8'}.items():assert cfg['reaper'][key]==value,(platform,key)
     if platform=='macos':assert cfg['reaper']['mac_dark_mode']=='1'
     assert cfg['midiedit']['default_colormap']=='@@RESOURCE@@/Data/colormaps/Cubase.png',(platform,'default_colormap')
     assert not any(k.startswith(('coreaudio','midiins')) for k in cfg['reaper'])
