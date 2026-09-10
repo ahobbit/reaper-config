@@ -13,16 +13,11 @@ HOW TO USE ON ANOTHER PC
    - Creates a backup of your previous REAPER configuration, then adapts and
      applies the new preferences to your user profile.
    - Ensure the process finishes with a green confirmation message.
+   - If SWS is not yet installed, the script launches the SWS installer automatically.
    - The REAPER installer may ask for administrator elevation; all other steps
      run strictly inside your user profile.
-   - If PowerShell script execution is restricted on your machine, see the
-     manual restore instructions below.
 
-3. Run `Installers\SWS-2.14.0.7-Windows-x64.exe`.
-   - Install for the same REAPER directory you just set up.
-   - ReaPack is copied automatically by the script; no separate installer needed.
-
-4. Open REAPER.
+3. Open REAPER.
    - Go to Preferences > Audio > Device and select your audio interface and driver.
    - Review MIDI devices in Preferences > Audio > MIDI Devices.
    - You should see the Reapertips theme and the Reapertips Colors toolbar.

@@ -11,12 +11,9 @@ MACOS: APPLE SILICON & INTEL (REAPER NATIVE MODE)
      and applies the new settings for your user account.
    - If Finder prevents running the script, open Terminal and execute:
      bash /path/to/Apply-configuration.command
-3. Install the SWS extension for your architecture (Apple Silicon or Intel).
-   - Copy `reaper_sws-*.dylib` from the SWS DMG into your user's UserPlugins folder:
-     ~/Library/Application Support/REAPER/UserPlugins
-   - ReaPack is installed automatically by the script.
+   - SWS and ReaPack extensions are installed automatically into UserPlugins.
    - Do NOT run REAPER under Rosetta with ARM-native plugins.
-4. Open REAPER. Configure your Audio and MIDI devices in Preferences.
+3. Open REAPER. Configure your Audio and MIDI devices in Preferences.
    - On the Reapertips Colors toolbar, click:
      Color management > Load color set from file
    - Load: ~/Library/Application Support/REAPER/ColorSets/Reapertips/Mac-Reapertips.SWSColor

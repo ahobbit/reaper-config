@@ -18,3 +18,11 @@ Initial traceable release after installing Reapertips 1.93b, applying the balanc
 ## v1.0.1 — 2026-09-10
 
 Separated Kontakt 8 Audio Unit preset metadata into macOS platform profile (contains colons in filename, invalid on Windows filesystems). Added Windows filename validation to distribution build checks.
+
+## v1.0.2 — 2026-09-10
+
+- Automated SWS extension installation: macOS script mounts SWS DMG and copies dylib directly; Windows script auto-launches SWS installer if missing.
+- Added `-ExecutionPolicy Bypass` to Windows launcher to prevent script execution restrictions.
+- Migrated packaging pipeline to automated GitHub Actions with calendar-dated releases (`REAPER Setup YYYY-MM-DD`).
+- Standardized all script names, directory structures, and console messages to English.
+- Simplified documentation with user-centric quick start guides.

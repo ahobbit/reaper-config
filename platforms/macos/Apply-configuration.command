@@ -31,10 +31,28 @@ cp Fonts/*.ttf "$HOME/Library/Fonts/"
 mkdir -p "$resource/UserPlugins"
 if [ "$(sysctl -n hw.optional.arm64 2>/dev/null || echo 0)" = 1 ]; then
   cp Installers/reaper_reapack-arm64.dylib "$resource/UserPlugins/"
+  sws_dmg="Installers/SWS-2.14.0.7-macOS-AppleSilicon.dmg"
+  sws_dylib="reaper_sws-arm64.dylib"
 else
   cp Installers/reaper_reapack-x86_64.dylib "$resource/UserPlugins/"
+  sws_dmg="Installers/SWS-2.14.0.7-macOS-Intel.dmg"
+  sws_dylib="reaper_sws-x86_64.dylib"
+fi
+if [ -f "$sws_dmg" ]; then
+  sws_mount=$(mktemp -d)
+  if yes 2>/dev/null | hdiutil attach -nobrowse -readonly -mountpoint "$sws_mount" "$sws_dmg" >/dev/null 2>&1; then
+    if [ -f "$sws_mount/$sws_dylib" ]; then
+      cp "$sws_mount/$sws_dylib" "$resource/UserPlugins/"
+    fi
+    if [ -d "$sws_mount/Grooves" ]; then
+      mkdir -p "$resource/Grooves"
+      ditto "$sws_mount/Grooves" "$resource/Grooves/"
+    fi
+    hdiutil detach "$sws_mount" >/dev/null 2>&1 || true
+  fi
+  rmdir "$sws_mount" 2>/dev/null || true
 fi
 printf '\nConfiguration applied. Backup: %s\n' "$backup"
-printf 'Install SWS for your architecture. Launch REAPER in native mode.\n'
+printf 'ReaPack and SWS extensions installed. Launch REAPER in native mode.\n'
 printf 'In the Colors toolbar: Color management > Load color set from file > ColorSets/Reapertips/Mac-Reapertips.SWSColor.\n'
 printf 'Select your audio and MIDI devices in Preferences.\n'

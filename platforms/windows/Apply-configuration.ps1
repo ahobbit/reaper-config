@@ -82,9 +82,14 @@ public static class ReapertipsNative {
     }
     $result = [IntPtr]::Zero
     [ReapertipsNative]::SendMessageTimeoutW([IntPtr]0xffff,0x001D,[IntPtr]::Zero,[IntPtr]::Zero,2,1000,[ref]$result) | Out-Null
+    $swsPlugin = Join-Path $plugins 'reaper_sws64.dll'
+    $swsInstaller = Join-Path $bundle 'Installers\SWS-2.14.0.7-Windows-x64.exe'
+    if (-not (Test-Path -LiteralPath $swsPlugin) -and (Test-Path -LiteralPath $swsInstaller)) {
+        Write-Host "Launching SWS extension installer..." -ForegroundColor Cyan
+        Start-Process -FilePath $swsInstaller -Wait
+    }
     Write-Host "Configuration and colors installed to: $resource" -ForegroundColor Green
     Write-Host "Backup (if previous configuration existed): $backup"
-    Write-Host 'Install SWS now using the included installer if not already installed.'
     Write-Host 'Open REAPER and select your audio interface in Preferences > Audio > Device.'
 } catch {
     Write-Host ('ERROR: ' + $_.Exception.Message) -ForegroundColor Red
