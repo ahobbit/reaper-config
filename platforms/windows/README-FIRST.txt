@@ -5,7 +5,7 @@ HOW TO USE ON ANOTHER PC
 
 1. Copy and extract the entire folder. Close REAPER if running.
 
-2. Run `02-APLICAR-CONFIGURACION.cmd` with your normal user account.
+2. Run `02-APPLY-CONFIGURATION.cmd` with your normal user account.
    - Checks for an existing REAPER install: if missing or older than 7.79,
      it downloads the official installer and verifies its SHA-256 hash.
    - Complete the normal standard x64 installation; do NOT launch REAPER when finished.
@@ -18,7 +18,7 @@ HOW TO USE ON ANOTHER PC
    - If PowerShell script execution is restricted on your machine, see the
      manual restore instructions below.
 
-3. Run `Instaladores\SWS-2.14.0.7-Windows-x64.exe`.
+3. Run `Installers\SWS-2.14.0.7-Windows-x64.exe`.
    - Install for the same REAPER directory you just set up.
    - ReaPack is copied automatically by the script; no separate installer needed.
 
@@ -72,7 +72,7 @@ BACKUPS & RESTORATION
 
 Before overwriting any settings, the script creates a backup copy of your existing
 REAPER configuration in:
-`Documents\REAPER\Configuration Backups\Antes-Reapertips-<DATE>\REAPER`
+`Documents\REAPER\Configuration Backups\Before-Reapertips-<DATE>\REAPER`
 To roll back: close REAPER, rename current `%APPDATA%\REAPER`, and copy the backed-up
 folder back to `%APPDATA%`.
 Fonts are installed into your user profile and are preserved across restorations.
@@ -81,21 +81,21 @@ MANUAL RESTORE (if scripts cannot be run)
 
 1. Install REAPER 7.79+ from https://www.reaper.fm/download.php.
 2. With REAPER closed, make a backup copy of `%APPDATA%\REAPER`.
-3. Copy the contents of `Configuracion` into `%APPDATA%\REAPER`.
+3. Copy the contents of `Configuration` into `%APPDATA%\REAPER`.
 4. In `reaper.ini` and `S&M.ini`, replace `@@RESOURCE@@` with the full path to
    `%APPDATA%\REAPER` and `@@DOCUMENTS@@` with your Documents path (use forward slashes `/`).
    Do NOT run REAPER with unreplaced placeholders.
-5. Copy `Instaladores\reaper_reapack-x64.dll` into `UserPlugins\`.
-6. Install the fonts from `Fuentes\` using the Windows Install button.
+5. Copy `Installers\reaper_reapack-x64.dll` into `UserPlugins\`.
+6. Install the fonts from `Fonts\` using the Windows Install button.
 7. Run the SWS installer.
 8. In REAPER, click Color management > Load color set from file and select
    `ColorSets\Reapertips\Win-Reapertips.SWSColor`.
 
 PACKAGE CONTENTS
 
-- Configuracion: REAPER resources pre-configured for Windows.
-- Instaladores: SWS and ReaPack x64; REAPER downloaded on demand (or bundled with --offline).
-- Fuentes: Theme typography fonts.
+- Configuration: REAPER resources pre-configured for Windows.
+- Installers: SWS and ReaPack x64; REAPER downloaded on demand (or bundled with --offline).
+- Fonts: Theme typography fonts.
 - COMPATIBILITY.md: System matrix and verification notes.
 - SHA256.json: Integrity manifest checked by the installer before copying.
 

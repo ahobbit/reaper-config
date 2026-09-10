@@ -1,7 +1,7 @@
 MACOS: APPLE SILICON & INTEL (REAPER NATIVE MODE)
 
 1. Copy and extract this folder. Close REAPER if it is open.
-2. Run `Aplicar-configuracion.command`.
+2. Run `Apply-configuration.command`.
    - It checks your current REAPER installation. If missing or older than 7.79,
      it downloads the official build from reaper.fm and validates its SHA-256 hash.
    - If an existing newer version is present, it is kept as-is.
@@ -10,7 +10,7 @@ MACOS: APPLE SILICON & INTEL (REAPER NATIVE MODE)
    - It creates an automatic backup of your existing configuration, then adapts
      and applies the new settings for your user account.
    - If Finder prevents running the script, open Terminal and execute:
-     bash /path/to/Aplicar-configuracion.command
+     bash /path/to/Apply-configuration.command
 3. Install the SWS extension for your architecture (Apple Silicon or Intel).
    - Copy `reaper_sws-*.dylib` from the SWS DMG into your user's UserPlugins folder:
      ~/Library/Application Support/REAPER/UserPlugins

@@ -20,18 +20,18 @@ for platform in ['windows','macos']:
     else:entries=[dict(zip(['sha256','path'],line.split('  ',1))) for line in (dest/'SHA256SUMS').read_text().splitlines()]
     for entry in entries:assert hashlib.sha256((dest/entry['path']).read_bytes()).hexdigest()==entry['sha256'],entry['path']
     with zipfile.ZipFile(dest.with_suffix('.zip')) as z:assert z.testzip() is None
-    assert not list((dest/'Instaladores').glob('REAPER-*')),'Expected lightweight packages'
+    assert not list((dest/'Installers').glob('REAPER-*')),'Expected lightweight packages'
     print(platform, len(entries),'manifest entries verified')
 menu=configparser.ConfigParser(interpolation=None);menu.read(r/'common/reaper-menu.ini');kb=(r/'common/reaper-kb.ini').read_text()
 for key,value in menu['Floating toolbar 2'].items():
     if key.startswith('icon_'):assert (r/'common/Data/toolbar_icons'/value).exists(),value
     if key.startswith('item_') and re.match(r'^_[a-f0-9]{32} ',value):assert value.split()[0][1:] in kb
-win=json.loads((r/'platforms/windows/colores-windows.json').read_text())
+win=json.loads((r/'platforms/windows/windows-colors.json').read_text())
 mac=configparser.ConfigParser();mac.read(r/'platforms/macos/ColorSets/Reapertips/Mac-Reapertips.SWSColor')
 for i,w in enumerate(win,1):
     v=int(mac['SWS Color'][f'custcolor{i}'],0);assert w==((v&255)<<16 | v&65280 | v>>16&255)
-for p in [r/'platforms/macos/Preparar-REAPER.sh',r/'platforms/macos/Aplicar-configuracion.command']:subprocess.run(['bash','-n',str(p)],check=True)
-helper=(r/'platforms/macos/Preparar-REAPER.sh').read_text()
+for p in [r/'platforms/macos/Prepare-REAPER.sh',r/'platforms/macos/Apply-configuration.command']:subprocess.run(['bash','-n',str(p)],check=True)
+helper=(r/'platforms/macos/Prepare-REAPER.sh').read_text()
 macdep=next(x for x in lock['files'] if x['name'].startswith('REAPER-') and x['platform']=='macos')
 assert f"required='{lock['versions']['reaper']}'" in helper
 assert macdep['url'] in helper and macdep['name'] in helper
