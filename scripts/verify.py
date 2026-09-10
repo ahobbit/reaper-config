@@ -42,4 +42,7 @@ for version,expected in [('7.78',1),('7.79',0),('7.79.0',0),('7.80',0),('8.0',0)
     result=subprocess.run(['bash','-c','version_at_least() {'+func+'\n}\nversion_at_least "$1" "$2"','test',version,'7.79'])
     assert result.returncode==expected,(version,result.returncode)
 for p in (r/'common').rglob('*.ini'):assert '/Users/yon/' not in p.read_text(),p
-print('PASS: profiles, palette byte order, references, shell syntax, version comparator, dependency consistency, manifests and archives.')
+for p in (r/'common').rglob('*.RPP'):assert '/Users/' not in p.read_text(),p
+assert (r/'common/Data/Metronome Sounds/DAWs/Pro Tools/Marimba/Metronome.wav').exists()
+assert (r/'common/Data/Metronome Sounds/DAWs/Pro Tools/Marimba/MetronomeUp.wav').exists()
+print('PASS: profiles, palette byte order, references, shell syntax, version comparator, dependency consistency, metronome sounds, manifests and archives.')

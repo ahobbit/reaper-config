@@ -24,7 +24,7 @@ export REAPERTIPS_RESOURCE="$resource"
 export REAPERTIPS_DOCUMENTS="$HOME/Documents"
 while IFS= read -r -d '' f; do
   /usr/bin/perl -pi -e 's/\@\@RESOURCE\@\@/$ENV{REAPERTIPS_RESOURCE}/g; s/\@\@DOCUMENTS\@\@/$ENV{REAPERTIPS_DOCUMENTS}/g' "$f"
-done < <(find "$stage/Configuration" -name '*.ini' -print0)
+done < <(find "$stage/Configuration" \( -name '*.ini' -o -name '*.RPP' \) -print0)
 ditto "$stage/Configuration" "$resource"
 for folder in Projects Peaks 'Auto Backups' 'Unsaved Projects'; do mkdir -p "$HOME/Documents/REAPER/$folder"; done
 cp Fonts/*.ttf "$HOME/Library/Fonts/"

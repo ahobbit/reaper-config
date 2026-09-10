@@ -31,10 +31,10 @@ try {
         $relative = $file.FullName.Substring($source.Length + 1)
         $target = Join-Path $resource $relative
         New-Item -ItemType Directory -Path (Split-Path $target) -Force | Out-Null
-        if ($file.Extension -eq '.ini') {
+        if ($file.Extension -eq '.ini' -or $file.Extension -eq '.RPP') {
             $content = [IO.File]::ReadAllText($file.FullName)
             $content = $content.Replace('@@RESOURCE@@', $resource.Replace('\','/')).Replace('@@DOCUMENTS@@', $documents.Replace('\','/'))
-            if ($content.Contains('@@RESOURCE@@') -or $content.Contains('@@DOCUMENTS@@')) { throw 'Unadapted placeholders remain in ini files.' }
+            if ($content.Contains('@@RESOURCE@@') -or $content.Contains('@@DOCUMENTS@@')) { throw 'Unadapted placeholders remain in configuration files.' }
             [IO.File]::WriteAllText($target, $content, $utf8)
         } else {
             Copy-Item -LiteralPath $file.FullName -Destination $target -Force

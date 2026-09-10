@@ -198,14 +198,19 @@ def cmd_apply(_args):
         print(f"{RED}Unsupported OS for live apply.{RESET}")
         return 1
 
+    dist_dir = ROOT / "dist" / f"REAPER-Reapertips-{plat}"
+    if not dist_dir.exists():
+        print(f"{CYAN}Building distribution package first...{RESET}")
+        cmd_build(argparse.Namespace(platform=plat, offline=False))
+
     if plat == "macos":
-        script = ROOT / "platforms/macos/Apply-configuration.command"
+        script = dist_dir / "Apply-configuration.command"
         print(f"{CYAN}Executing {script}...{RESET}")
-        result = subprocess.run(["bash", str(script)], cwd=script.parent)
+        result = subprocess.run(["bash", str(script)], cwd=dist_dir)
         return result.returncode
     elif plat == "windows":
-        script = ROOT / "platforms/windows/02-APPLY-CONFIGURATION.cmd"
-        result = subprocess.run([str(script)], shell=True)
+        script = dist_dir / "02-APPLY-CONFIGURATION.cmd"
+        result = subprocess.run([str(script)], cwd=dist_dir, shell=True)
         return result.returncode
     return 1
 
