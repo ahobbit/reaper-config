@@ -3,7 +3,8 @@
     "reaper": "7.79",
     "sws": "2.14.0.7",
     "reapack": "1.2.6",
-    "theme": "1.93b"
+    "theme": "1.93b",
+    "darkmode": "1.1.0"
   },
   "files": [
     {
@@ -23,6 +24,12 @@
       "platform": "windows",
       "url": "https://github.com/cfillion/reapack/releases/download/v1.2.6/reaper_reapack-x64.dll",
       "sha256": "820ac691f9444d7c49c69413ac3dc264cde5204b4dd9a07d13ad9fefaa1243df"
+    },
+    {
+      "name": "reaper_DarkMode_x64.dll",
+      "platform": "windows",
+      "url": "https://github.com/RobKor77/ReaperDarkMode/releases/download/v1.1.0/reaper_DarkMode_x64.dll",
+      "sha256": "d21a9a8a4b1ed5f138afb2d6881a25db128f835d3fffeb9e2ec2564d8863a636"
     },
     {
       "name": "REAPER-7.79-macOS-Universal.dmg",

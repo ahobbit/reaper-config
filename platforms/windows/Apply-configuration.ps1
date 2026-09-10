@@ -43,6 +43,7 @@ try {
     $plugins = Join-Path $resource 'UserPlugins'
     New-Item -ItemType Directory -Path $plugins -Force | Out-Null
     Copy-Item -LiteralPath (Join-Path $bundle 'Installers\reaper_reapack-x64.dll') -Destination $plugins -Force
+    Copy-Item -LiteralPath (Join-Path $bundle 'Installers\reaper_DarkMode_x64.dll') -Destination $plugins -Force
     Add-Type @'
 using System;
 using System.Runtime.InteropServices;

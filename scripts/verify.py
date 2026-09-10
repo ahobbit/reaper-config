@@ -8,6 +8,7 @@ for platform in ['windows','macos']:
     profile=r/'platforms'/platform
     cfg=configparser.ConfigParser(interpolation=None);cfg.read(profile/'reaper.ini')
     for key,value in {'autosaveint':'1','workbufmsex':'600','prebufperb':'50','renderbsnew':'1024','vuupdfreq':'30','tcpalign':'787'}.items():assert cfg['reaper'][key]==value,(platform,key)
+    if platform=='macos':assert cfg['reaper']['mac_dark_mode']=='1'
     assert cfg['midiedit']['default_colormap']=='@@RESOURCE@@/Data/colormaps/Cubase.png',(platform,'default_colormap')
     assert not any(k.startswith(('coreaudio','midiins')) for k in cfg['reaper'])
     assert len(list((profile/'ColorSets/Reapertips').glob('*.SWSColor')))==13
@@ -53,4 +54,8 @@ assert (r/'common/Data/toolbar_icons/150/RT_Blue_toolbar_add.png').exists()
 assert (r/'common/Data/toolbar_icons/200/RT_Blue_toolbar_add.png').exists()
 assert len(list((r/'common/Data/toolbar_icons').glob('RT_*_toolbar_*.png'))) >= 6000
 assert (r/'common/Data/Borders/!Preview_Borders.png').exists()
-print('PASS: profiles, palette byte order, references, shell syntax, version comparator, dependency consistency, metronome sounds, colormaps, essential icons, manifests and archives.')
+dark_dep=next(x for x in lock['files'] if x['name']=='reaper_DarkMode_x64.dll' and x['platform']=='windows')
+assert dark_dep['sha256']=='d21a9a8a4b1ed5f138afb2d6881a25db128f835d3fffeb9e2ec2564d8863a636'
+assert (r/'common/Scripts/ReaperDarkMode/DarkModeConfig.lua').exists()
+assert 'reaper_DarkMode_x64.dll' in (r/'platforms/windows/Apply-configuration.ps1').read_text()
+print('PASS: profiles, palette byte order, references, shell syntax, version comparator, dependency consistency, metronome sounds, colormaps, essential icons, dark mode, manifests and archives.')

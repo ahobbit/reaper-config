@@ -22,7 +22,8 @@ A fine-tuned, reproducible REAPER setup designed for a clean and efficient produ
 * **🔔 66 Curated Metronome Sounds:** Built-in clicks from popular DAWs (Pro Tools, Logic, Ableton, Cubase, FL Studio, MPC, Maschine) and mechanical clicks, pre-configured with the Reapertips favorite (Pro Tools Marimba).
 * **🎨 11 Reapertips MIDI Colormaps:** High-contrast velocity and note colormaps (Cold, Cubase, Deluxe, FL Dark/Light, Forest, Rainbow, Shadow, Smooth, Vintage), pre-configured with Cubase velocity colors.
 * **✨ 750+ Essential Toolbar Icons in 13 Colorways:** ~19,800 icons across 13 color themes (Blue, Green, Red, Synthwave, Pastel, etc.) with native 100%, 150%, and 200% Retina scaling, plus border presets in `Data/Borders/`.
-* **🔌 Essential Extensions Pre-bundled:** Includes **ReaPack 1.2.6** (with community repositories) and **SWS 2.14.0.7**.
+* **🌙 Full Dark Mode (Windows & macOS):** Bundles RobKor77's **ReaperDarkMode 1.1.0** for Windows (dark title bars, menus, dialogs, and controls) and enables native Mojave+ Dark Mode for macOS.
+* **🔌 Essential Extensions Pre-bundled:** Includes **ReaPack 1.2.6** (with community repositories), **SWS 2.14.0.7**, and **ReaperDarkMode 1.1.0** (Windows).
 
 ---
 
