@@ -1,0 +1,67 @@
+name: Build & Release Packages
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Packages & Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache downloaded installers
+        uses: actions/cache@v4
+        with:
+          path: downloads
+          key: ${{ runner.os }}-reaper-downloads-${{ hashFiles('dependencies.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-reaper-downloads-
+
+      - name: Build packages
+        run: |
+          python3 scripts/build.py all --download
+
+      - name: Verify packages and integrity
+        run: |
+          python3 scripts/verify.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: reaper-packages
+          path: dist/*.zip
+          if-no-files-found: error
+
+      - name: Release Latest Build (main branch)
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create latest dist/*.zip \
+            --title "Latest Automated Build" \
+            --notes "Automated build from commit ${{ github.sha }}. Download the ZIP for your operating system and follow README-FIRST.txt inside." \
+            --clobber
+
+      - name: Publish Tagged Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ github.ref_name }} dist/*.zip \
+            --title "Release ${{ github.ref_name }}" \
+            --generate-notes

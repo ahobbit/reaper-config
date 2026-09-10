@@ -16,15 +16,23 @@ Repository: [https://github.com/ahobbit/reaper-config](https://github.com/ahobbi
 
 All six Reapertips theme variants and their icons are tracked in Git to ensure an exact visual restore. Stock themes are sourced directly from the REAPER installer. Installers, generated ZIP archives, project recordings, peak caches, and license keys are excluded via `.gitignore`. Third-party assets retain their original authorship; this is a personal configuration repository.
 
-## Installation
+## Installation (Quick & Easy)
 
-Use the packages in `dist/` and follow their `README-FIRST.txt`. The installer scripts create a backup of your current setup, adapt absolute paths to your user account, and apply the configuration. Select your audio and MIDI devices on the target machine. Install external third-party plugins separately.
+You do **not** need to install Python or run any build commands. Ready-to-use packages are built and released automatically by GitHub Actions on every update:
+
+1. Go to the [Releases page](https://github.com/ahobbit/reaper-config/releases).
+2. Download `REAPER-Reapertips-windows.zip` (for Windows) or `REAPER-Reapertips-macos.zip` (for Mac).
+3. Extract the ZIP and follow the instructions in `README-FIRST.txt`:
+   - **Windows:** Double-click `02-APPLY-CONFIGURATION.cmd`.
+   - **macOS:** Double-click `Apply-configuration.command`.
+
+The installer scripts automatically back up your existing setup, adapt paths to your user account, verify file hashes, and apply the configuration.
 
 [See compatibility details and verification boundaries](docs/COMPATIBILITY.md).
 
-## Building Distribution Packages from Git
+## Building Locally (Optional)
 
-Requires Python 3.9+ only on the machine packaging the bundle. End-users installing the packages do **not** need Python.
+If you prefer to package bundles manually from source instead of using GitHub Releases, Python 3.9+ is required on the packaging machine:
 
 ```sh
 python3 scripts/build.py all --download
