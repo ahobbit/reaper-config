@@ -58,4 +58,10 @@ dark_dep=next(x for x in lock['files'] if x['name']=='reaper_DarkMode_x64.dll' a
 assert dark_dep['sha256']=='d21a9a8a4b1ed5f138afb2d6881a25db128f835d3fffeb9e2ec2564d8863a636'
 assert (r/'common/Scripts/ReaperDarkMode/DarkModeConfig.lua').exists()
 assert 'reaper_DarkMode_x64.dll' in (r/'platforms/windows/Apply-configuration.ps1').read_text()
-print('PASS: profiles, palette byte order, references, shell syntax, version comparator, dependency consistency, metronome sounds, colormaps, essential icons, dark mode, manifests and archives.')
+reapack_cfg=configparser.ConfigParser(interpolation=None);reapack_cfg.read(r/'common/reapack.ini')
+assert any('FeedTheCat Tools' in v for v in reapack_cfg['remotes'].values())
+update_script=(r/'common/Scripts/Various/REAPER Update Utility.lua')
+assert update_script.exists()
+assert hashlib.sha256(update_script.read_bytes()).hexdigest()=='cee7143cf14112fad369ecf27da22227e2bdaaf87d5928c3035901f9a509258f'
+assert 'Script: REAPER Update Utility.lua' in (r/'common/reaper-kb.ini').read_text()
+print('PASS: profiles, palette byte order, references, shell syntax, version comparator, dependency consistency, metronome sounds, colormaps, essential icons, dark mode, update utility, manifests and archives.')

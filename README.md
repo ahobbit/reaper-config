@@ -23,6 +23,7 @@ A fine-tuned, reproducible REAPER setup designed for a clean and efficient produ
 * **🎨 11 Reapertips MIDI Colormaps:** High-contrast velocity and note colormaps (Cold, Cubase, Deluxe, FL Dark/Light, Forest, Rainbow, Shadow, Smooth, Vintage), pre-configured with Cubase velocity colors.
 * **✨ 750+ Essential Toolbar Icons in 13 Colorways:** ~19,800 icons across 13 color themes (Blue, Green, Red, Synthwave, Pastel, etc.) with native 100%, 150%, and 200% Retina scaling, plus border presets in `Data/Borders/`.
 * **🌙 Full Dark Mode (Windows & macOS):** Bundles RobKor77's **ReaperDarkMode 1.1.0** for Windows (dark title bars, menus, dialogs, and controls) and enables native Mojave+ Dark Mode for macOS.
+* **🔄 1-Click REAPER Update Utility:** Pre-bundled script by FeedTheCat to upgrade, downgrade, or test pre-releases directly inside REAPER. FeedTheCat repository pre-configured in ReaPack.
 * **🔌 Essential Extensions Pre-bundled:** Includes **ReaPack 1.2.6** (with community repositories), **SWS 2.14.0.7**, and **ReaperDarkMode 1.1.0** (Windows).
 
 ---
@@ -53,6 +54,7 @@ Extract the ZIP and close REAPER if it is open:
 4. *(Optional)* Right-click the **Metronome** icon in the transport bar to switch between any of the 66 bundled click sounds in `Data/Metronome Sounds/`.
 5. *(Optional)* In **Preferences > MIDI Editor**, customize your default colormap from `Data/colormaps/` (or switch note coloring in the MIDI editor via **View > Color notes by**).
 6. *(Optional)* Customize any toolbar: right-click a toolbar, click **Customize toolbar... > Icon... > Change icon**, and filter by typing any color or action name (e.g. `blue grid`, `synthwave`, `red`).
+7. *(Optional)* Update or test REAPER versions anytime: press `?` to open the **Actions** list, search for `Script: REAPER Update Utility.lua`, and run it.
 
 ---
 
