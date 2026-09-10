@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+echo "Running pre-commit verification..."
+# 1. Check for personal user path leaks
+if git diff --cached --name-only | grep -E '\.(ini|json|txt|md)$' | xargs grep -E '/Users/[a-zA-Z0-9_-]+' 2>/dev/null; then
+  echo "ERROR: Personal path leak (/Users/username) detected in staged files!"
+  exit 1
+fi
+# 2. Check for license files
+if git diff --cached --name-only | grep -E 'reaper-(license|reginfo)' 2>/dev/null; then
+  echo "ERROR: Attempting to commit REAPER license/registration file!"
+  exit 1
+fi
+# 3. Run verification suite
+python3 scripts/verify.py
+echo "✓ Pre-commit checks passed."

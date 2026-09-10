@@ -64,18 +64,28 @@ Extract the ZIP and close REAPER if it is open:
 
 ---
 
-## 🛠️ Making Changes & Updating
+## 🛠️ Developer Workflow (DX)
 
-Everything is automated through GitHub Actions:
+A unified CLI (`./dev`) and `Makefile` make it easy to inspect, sync, and verify settings between your live REAPER installation and this repository:
 
-1. **Tweak your setup:** Adjust settings in REAPER, then close it to save.
-2. **Commit your changes:**
+| Command | Description |
+| :--- | :--- |
+| `make diff` *(or `./dev diff`)* | Compare live REAPER settings against tracked repository profiles |
+| `make pull` *(or `./dev pull`)* | Import & sanitize updated settings from live REAPER into the repo |
+| `make test` *(or `./dev test`)* | Run test suite and manifest verification |
+| `make apply` *(or `./dev apply`)* | Deploy repo settings into local REAPER with automatic backup |
+| `make build` *(or `./dev build`)* | Package distribution ZIPs locally |
+| `make hook` *(or `./dev install-hook`)* | Install Git pre-commit hook to prevent path/license leaks |
+
+### Updating & Publishing
+1. Adjust settings inside REAPER, then close it to save.
+2. Run `make pull` to sync and sanitize changes into the repo.
+3. Commit and push:
    ```sh
-   git add common platforms
-   git commit -m "Describe your adjustment"
+   git commit -am "Update toolbar layout"
    git push origin main
    ```
-3. **Automatic Release:** In ~20 seconds, GitHub Actions runs integrity checks, packages the new Windows and macOS ZIPs, and updates the **[Latest Release](https://github.com/ahobbit/reaper-config/releases/latest)** automatically.
+4. GitHub Actions verifies tests, packages the ZIPs, and updates the **[Latest Release](https://github.com/ahobbit/reaper-config/releases/latest)** automatically in ~20s.
 
 ---
 
