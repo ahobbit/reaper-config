@@ -1,0 +1,58 @@
+{
+  "versions": {
+    "reaper": "7.79",
+    "sws": "2.14.0.7",
+    "reapack": "1.2.6",
+    "theme": "1.93b"
+  },
+  "files": [
+    {
+      "name": "REAPER-7.79-Windows-x64.exe",
+      "platform": "windows",
+      "url": "https://www.reaper.fm/files/7.x/reaper779_x64-install.exe",
+      "sha256": "f07714d894a073df40e88568f8aa524a74230f574b0688df681f9b7c0877f9df"
+    },
+    {
+      "name": "SWS-2.14.0.7-Windows-x64.exe",
+      "platform": "windows",
+      "url": "https://sws-extension.org/download/featured/sws-2.14.0.7-Windows-x64.exe",
+      "sha256": "02d04e663f9f07e0bf9626d29d29b086b37e8f21ef53b380c47f9e1f118162f9"
+    },
+    {
+      "name": "reaper_reapack-x64.dll",
+      "platform": "windows",
+      "url": "https://github.com/cfillion/reapack/releases/download/v1.2.6/reaper_reapack-x64.dll",
+      "sha256": "820ac691f9444d7c49c69413ac3dc264cde5204b4dd9a07d13ad9fefaa1243df"
+    },
+    {
+      "name": "REAPER-7.79-macOS-Universal.dmg",
+      "platform": "macos",
+      "url": "https://www.reaper.fm/files/7.x/reaper779_universal.dmg",
+      "sha256": "2493cea3cd6105d84bbf02710280d73ea8a119f06370152773483767fade8602"
+    },
+    {
+      "name": "SWS-2.14.0.7-macOS-AppleSilicon.dmg",
+      "platform": "macos",
+      "url": "https://sws-extension.org/download/featured/sws-2.14.0.7-Darwin-arm64.dmg",
+      "sha256": "03338b0608775840aa6c51cc4d9e0404634ba4095e5c5253d944b387ba439100"
+    },
+    {
+      "name": "reaper_reapack-arm64.dylib",
+      "platform": "macos",
+      "url": "https://github.com/cfillion/reapack/releases/download/v1.2.6/reaper_reapack-arm64.dylib",
+      "sha256": "c7670f3b2e405b9037d49b1941a4d8c3762fff326cecc0c58ac4faeca171f07b"
+    },
+    {
+      "name": "SWS-2.14.0.7-macOS-Intel.dmg",
+      "platform": "macos",
+      "url": "https://sws-extension.org/download/featured/sws-2.14.0.7-Darwin-x86_64.dmg",
+      "sha256": "ef04a089a39c087a545c1b4e05d4d38b7f3933de22f059d6080a7870dd11c9cb"
+    },
+    {
+      "name": "reaper_reapack-x86_64.dylib",
+      "platform": "macos",
+      "url": "https://github.com/cfillion/reapack/releases/download/v1.2.6/reaper_reapack-x86_64.dylib",
+      "sha256": "48b261974e36671384ca902a3b3d5a614178f40b1beb7c138c741410ea5d7d9e"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+MACOS: APPLE SILICON E INTEL (REAPER EN MODO NATIVO)
+
+1. Copia y extrae la carpeta. Cierra REAPER.
+2. Ejecuta Aplicar-configuracion.command. Comprueba REAPER y lo descarga desde
+   reaper.fm, verificando su hash, si falta o es anterior a 7.79. Si ya es mas
+   nuevo lo conserva. En instalaciones nuevas usa ~/Applications/REAPER.app;
+   para actualizaciones conserva antes una copia de la aplicacion anterior.
+   Si /Applications no permite escribir, indica instalar el DMG manualmente.
+   Despues hace backup y adapta/aplica las preferencias a tu usuario.
+   Si Finder no permite ejecutarlo, abre Terminal y ejecuta:
+   bash /ruta/a/Aplicar-configuracion.command
+3. Instala SWS desde el DMG de tu arquitectura: AppleSilicon o Intel.
+   Copia su reaper_sws-*.dylib a la carpeta UserPlugins de los recursos REAPER
+   de TU USUARIO: ~/Library/Application Support/REAPER/UserPlugins.
+   ReaPack ya lo copia el script. No uses REAPER bajo Rosetta con el perfil ARM.
+4. Abre REAPER. Configura audio y MIDI. En la barra Reapertips Colors, pulsa
+   Color management > Load color set from file y carga
+   ~/Library/Application Support/REAPER/ColorSets/Reapertips/Mac-Reapertips.SWSColor.
+   macOS guarda esos colores en su selector de colores del sistema; este paso
+   evita reemplazar otros colores personales que uses en otras aplicaciones.
+
+Revisa COMPATIBILIDAD.md. No incluye plugins externos, bibliotecas ni licencias.
+Si hay otra version de ReaPack/SWS para una arquitectura diferente ya instalada,
+revisa UserPlugins para evitar cargar dos copias de la misma extension.
+La carpeta de respaldo aparece en Terminal. Para restaurarla: cierra REAPER,
+renombra su carpeta de recursos actual y restaura REAPER desde el backup.
+Las fuentes de usuario no se desinstalan al restaurar la configuracion.
+
+El script se ha comprobado sintacticamente y el paquete por hashes. No se ha
+aplicado sobre este Mac para no alterar la configuracion de trabajo actual;
+no se ha probado el conjunto en un Mac Intel.

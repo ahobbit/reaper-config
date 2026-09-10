@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+/downloads/
+/dist/
+/local-backups/
+*.ReaperConfigZip
+*.rpp-bak
+*.RPP
+*.rpp
+*.reapeaks
+reaper-reginfo*.ini
+reaper-license.rk
