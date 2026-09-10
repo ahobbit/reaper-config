@@ -12,7 +12,11 @@ for platform in ['windows','macos']:
     assert len(list((profile/'ColorSets/Reapertips').glob('*.SWSColor')))==13
     for p in profile.rglob('*.ini'):assert '/Users/yon/' not in p.read_text(),p
     dest=r/'dist'/f'REAPER-Reapertips-{platform}'
-    if platform=='windows':entries=json.loads((dest/'SHA256.json').read_text())
+    if platform=='windows':
+        for file in dest.rglob('*'):
+            assert not re.search(r'[<>:"\\|?*]',file.name),file
+            assert not file.name.endswith(('.', ' ')),file
+        entries=json.loads((dest/'SHA256.json').read_text())
     else:entries=[dict(zip(['sha256','path'],line.split('  ',1))) for line in (dest/'SHA256SUMS').read_text().splitlines()]
     for entry in entries:assert hashlib.sha256((dest/entry['path']).read_bytes()).hexdigest()==entry['sha256'],entry['path']
     with zipfile.ZipFile(dest.with_suffix('.zip')) as z:assert z.testzip() is None

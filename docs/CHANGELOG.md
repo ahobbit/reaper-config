@@ -16,3 +16,7 @@ Primera versión trazable tras instalar Reapertips 1.93b, aplicar la selección 
 - Sin remoto Git. Validación estructural de paquetes; pendiente prueba de restauración en Windows y Mac limpio.
 
 - Instalación/actualización de REAPER bajo demanda desde URL oficial, con hash fijado y conservación de versiones superiores. Opción offline del generador.
+
+## v1.0.1 — 2026-09-10
+
+Separa el estado del preset Audio Unit de Kontakt en el perfil Mac: su nombre contiene dos puntos y no puede copiarse a Windows. Añade validación de nombres de archivo Windows a los paquetes generados.
