@@ -48,4 +48,9 @@ assert (r/'common/Data/Metronome Sounds/DAWs/Pro Tools/Marimba/Metronome.wav').e
 assert (r/'common/Data/Metronome Sounds/DAWs/Pro Tools/Marimba/MetronomeUp.wav').exists()
 assert len(list((r/'common/Data/colormaps').glob('*.png')))==11
 assert (r/'common/Data/colormaps/Cubase.png').exists()
-print('PASS: profiles, palette byte order, references, shell syntax, version comparator, dependency consistency, metronome sounds, colormaps, manifests and archives.')
+assert (r/'common/Data/toolbar_icons/RT_Blue_toolbar_add.png').exists()
+assert (r/'common/Data/toolbar_icons/150/RT_Blue_toolbar_add.png').exists()
+assert (r/'common/Data/toolbar_icons/200/RT_Blue_toolbar_add.png').exists()
+assert len(list((r/'common/Data/toolbar_icons').glob('RT_*_toolbar_*.png'))) >= 6000
+assert (r/'common/Data/Borders/!Preview_Borders.png').exists()
+print('PASS: profiles, palette byte order, references, shell syntax, version comparator, dependency consistency, metronome sounds, colormaps, essential icons, manifests and archives.')
