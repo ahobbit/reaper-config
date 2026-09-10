@@ -1,57 +1,66 @@
-# Mi configuración REAPER / Reapertips
+# My REAPER / Reapertips Configuration
 
-Configuración personal reproducible para **Windows x64** y **macOS Intel/Apple Silicon**. Repositorio local creado a partir de los ajustes aplicados el 9–10 de septiembre de 2026. No tiene remoto y no se ha publicado.
+Reproducible personal setup for **Windows x64** and **macOS Intel/Apple Silicon**. Created from fine-tuned settings applied on September 9–10, 2026.
 
-## Qué guarda Git
+Repository: [https://github.com/ahobbit/reaper-config](https://github.com/ahobbit/reaper-config)
 
-- `common/`: barras, acciones, ratón, repositorios ReaPack, scripts/efectos y recursos compartidos.
-- `platforms/windows/`: preferencias adaptables, paletas Windows e instalador PowerShell.
-- `platforms/macos/`: preferencias Mac, paletas Mac y restauración `.command`.
-- `fonts/`: fuentes del tema.
-- `dependencies.lock.json`: versiones, URL oficial y SHA-256 de cada instalador/extensión.
-- `docs/`: compatibilidad e historial de decisiones.
-- `scripts/build.py`: crea carpetas/ZIP para trasladar a otro equipo.
+## What Git Tracks
 
-Se mantienen los seis temas Reapertips y sus iconos en Git para poder restaurar el aspecto exacto. Los temas de fábrica se obtienen del instalador REAPER. Instaladores, ZIP generados, grabaciones, cachés y licencias se excluyen con `.gitignore`. Los recursos de terceros conservan su autoría; este es un repositorio de uso personal, sin licencia de redistribución añadida.
+- `common/`: toolbars, actions, mouse modifiers, ReaPack repositories, scripts/effects, and shared assets.
+- `platforms/windows/`: adaptable preferences, Windows palettes, and PowerShell installer.
+- `platforms/macos/`: Mac preferences, Mac palettes, and `.command` restore script.
+- `fonts/`: theme typography.
+- `dependencies.lock.json`: pinned versions, official download URLs, and SHA-256 hashes for each installer/extension.
+- `docs/`: compatibility notes and decision history.
+- `scripts/build.py`: packages standalone handoff folders/ZIPs for transfer to another machine.
 
-## Instalar
+All six Reapertips theme variants and their icons are tracked in Git to ensure an exact visual restore. Stock themes are sourced directly from the REAPER installer. Installers, generated ZIP archives, project recordings, peak caches, and license keys are excluded via `.gitignore`. Third-party assets retain their original authorship; this is a personal configuration repository.
 
-Usa los paquetes de `dist/` y sigue su `LEEME-PRIMERO.txt`. Los scripts hacen copia de seguridad, adaptan rutas a tu usuario y conservan los ajustes de esta configuración. Selecciona audio y MIDI en el equipo destino. Instala los plugins externos por separado.
+## Installation
 
-[Consulta las compatibilidades y límites de verificación](docs/COMPATIBILIDAD.md).
+Use the packages in `dist/` and follow their `README-FIRST.txt`. The installer scripts create a backup of your current setup, adapt absolute paths to your user account, and apply the configuration. Select your audio and MIDI devices on the target machine. Install external third-party plugins separately.
 
-## Generar paquetes desde Git
+[See compatibility details and verification boundaries](docs/COMPATIBILITY.md).
 
-Requiere Python 3.9+ únicamente en el equipo que genera el paquete. Los usuarios de los paquetes no necesitan Python.
+## Building Distribution Packages from Git
+
+Requires Python 3.9+ only on the machine packaging the bundle. End-users installing the packages do **not** need Python.
 
 ```sh
 python3 scripts/build.py all --download
-# Para incluir tambien REAPER y no necesitar descargarlo en destino:
+# To bundle the official REAPER installer (no internet required on target machine):
 python3 scripts/build.py all --download --offline
 ```
 
-Si `dist/REAPER-Reapertips-windows` o `dist/REAPER-Reapertips-macos` ya existen, muévelos a otro lugar antes de regenerar. El generador se niega a sobrescribir entregas anteriores. `--offline` incluye REAPER; sin esa opción el script del destino lo descarga solo si falta o es antiguo. `--download` descarga solo los archivos ausentes y comprueba sus hashes; no instala ni ejecuta software.
+If `dist/REAPER-Reapertips-windows` or `dist/REAPER-Reapertips-macos` already exist, move them aside before rebuilding (the script prevents accidental overwrites).
+- `--offline` bundles the official REAPER installer inside the package. Without this flag, the target install script downloads it only if missing or outdated.
+- `--download` downloads missing pinned installers and validates their SHA-256 hashes without installing or executing anything.
 
-## Mantener el historial
+## Maintaining Configuration History
 
-Después de cambiar REAPER, cierra la aplicación para que guarde sus preferencias. Compara el ajuste correspondiente con los archivos versionados y traslada solo el cambio deseado. No copies indiscriminadamente la carpeta de recursos: incluye rutas locales, dispositivos, cachés y estado de ventanas.
+After modifying settings inside REAPER, close the application so it writes its preferences to disk. Compare the relevant setting against versioned files and commit only intended changes. Do not blindly copy the entire resource directory, as it contains machine-specific paths, active audio devices, peak caches, and window states.
 
 ```sh
 git diff
 git add common platforms docs dependencies.lock.json
-git commit -m "Describe el ajuste y por qué cambió"
+git commit -m "Describe the setting change and reason"
 ```
 
-Actualiza `docs/CHANGELOG.md` con el motivo y la verificación. Para recursos binarios, cambia el archivo y anota la versión. Para instaladores, actualiza URL y hash en el lock. Los cambios futuros de la aplicación **no se sincronizan automáticamente** con Git.
+Update [docs/CHANGELOG.md](docs/CHANGELOG.md) with details and verification steps. For binary assets, replace the file and document the version. For installers, update the URL and SHA-256 in `dependencies.lock.json`. Future changes in REAPER are **not automatically synchronized** with Git.
 
-Para inspeccionar una versión anterior sin modificar tu REAPER: `git show v1.0.0:platforms/windows/reaper.ini`. Restaurar Git no restaura automáticamente la aplicación: genera/aplica el paquete deseado con REAPER cerrado.
+To inspect a previous version without affecting your local REAPER install:
+```sh
+git show v1.0.0:platforms/windows/reaper.ini
+```
+Checking out a Git commit does not alter your live REAPER installation; generate and run the appropriate platform script with REAPER closed to apply changes.
 
-## Publicación
+## Automatic REAPER Verification & Bootstrap
 
-No se ha creado repositorio remoto. Para guardar el historial fuera del ordenador se puede añadir posteriormente un remoto privado. El Git local y el paquete de recuperación son cosas distintas: conserva ambos.
+The installer scripts verify the system's standard installation:
+- They download **the exact version pinned in the lockfile**, preserving environment reproducibility.
+- They check SHA-256 hashes before executing any installer.
+- They preserve any installed version that is equal to or newer than the required version.
+- On Windows, the interactive official installer is launched.
+- On macOS, the official DMG is mounted and the app bundle is copied (with automatic backup of any existing version). System security prompts are respected.
 
-## Comprobación automática de REAPER
-
-El script comprueba la instalación normal del sistema. Descarga **la versión fijada en el lock**, no una versión nueva arbitraria: eso mantiene repetible el entorno. Comprueba SHA-256 antes de usar el instalador. Conserva cualquier versión instalada igual o superior. Windows abre el instalador interactivo oficial; Mac monta el DMG oficial y copia la aplicación si tiene permisos. No suprime los avisos de seguridad del sistema ni acepta automáticamente acuerdos del instalador Windows.
-
-Para adoptar otra versión se actualizan URL, hash y versión del lock; el helper Mac y su hash deben actualizarse conjuntamente (el validador detecta inconsistencias). Las instalaciones portables y rutas Windows no estándar requieren instalación manual.
+To bump REAPER to a newer version, update the URL, SHA-256 hash, and version in `dependencies.lock.json`. On macOS, update the helper script and hash in tandem (the test suite verifies consistency). Portable and non-standard installation directories require manual setup.

@@ -30,7 +30,7 @@ for platform in (['windows','macos'] if args.platform=='all' else [args.platform
     (dest/'Instaladores').mkdir()
     for dep in dependencies:shutil.copy2(ROOT/'downloads'/dep['name'],dest/'Instaladores'/dep['name'])
     shutil.copy2(ROOT/'dependencies.lock.json',dest/'dependencies.lock.json')
-    shutil.copy2(ROOT/'docs/COMPATIBILIDAD.md',dest/'COMPATIBILIDAD.md')
+    shutil.copy2(ROOT/'docs/COMPATIBILITY.md',dest/'COMPATIBILITY.md')
     files=sorted(p for p in dest.rglob('*') if p.is_file())
     manifest=[{'path':p.relative_to(dest).as_posix(),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in files]
     if platform=='windows':(dest/'SHA256.json').write_text(json.dumps(manifest,indent=2))
