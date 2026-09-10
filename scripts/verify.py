@@ -8,6 +8,7 @@ for platform in ['windows','macos']:
     profile=r/'platforms'/platform
     cfg=configparser.ConfigParser(interpolation=None);cfg.read(profile/'reaper.ini')
     for key,value in {'autosaveint':'1','workbufmsex':'600','prebufperb':'50','renderbsnew':'1024','vuupdfreq':'30','tcpalign':'787'}.items():assert cfg['reaper'][key]==value,(platform,key)
+    assert cfg['midiedit']['default_colormap']=='@@RESOURCE@@/Data/colormaps/Cubase.png',(platform,'default_colormap')
     assert not any(k.startswith(('coreaudio','midiins')) for k in cfg['reaper'])
     assert len(list((profile/'ColorSets/Reapertips').glob('*.SWSColor')))==13
     for p in profile.rglob('*.ini'):assert '/Users/yon/' not in p.read_text(),p
@@ -45,4 +46,6 @@ for p in (r/'common').rglob('*.ini'):assert '/Users/yon/' not in p.read_text(),p
 for p in (r/'common').rglob('*.RPP'):assert '/Users/' not in p.read_text(),p
 assert (r/'common/Data/Metronome Sounds/DAWs/Pro Tools/Marimba/Metronome.wav').exists()
 assert (r/'common/Data/Metronome Sounds/DAWs/Pro Tools/Marimba/MetronomeUp.wav').exists()
-print('PASS: profiles, palette byte order, references, shell syntax, version comparator, dependency consistency, metronome sounds, manifests and archives.')
+assert len(list((r/'common/Data/colormaps').glob('*.png')))==11
+assert (r/'common/Data/colormaps/Cubase.png').exists()
+print('PASS: profiles, palette byte order, references, shell syntax, version comparator, dependency consistency, metronome sounds, colormaps, manifests and archives.')

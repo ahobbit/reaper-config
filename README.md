@@ -20,6 +20,7 @@ A fine-tuned, reproducible REAPER setup designed for a clean and efficient produ
   * 24 px track spacers and clean folder indentation.
 * **🛡️ Zero-Loss Project Backups:** Auto-saves every minute when not recording (up to 50 versions per project) into dedicated backup folders.
 * **🔔 66 Curated Metronome Sounds:** Built-in clicks from popular DAWs (Pro Tools, Logic, Ableton, Cubase, FL Studio, MPC, Maschine) and mechanical clicks, pre-configured with the Reapertips favorite (Pro Tools Marimba).
+* **🎨 11 Reapertips MIDI Colormaps:** High-contrast velocity and note colormaps (Cold, Cubase, Deluxe, FL Dark/Light, Forest, Rainbow, Shadow, Smooth, Vintage), pre-configured with Cubase velocity colors.
 * **🔌 Essential Extensions Pre-bundled:** Includes **ReaPack 1.2.6** (with community repositories) and **SWS 2.14.0.7**.
 
 ---
@@ -48,6 +49,7 @@ Extract the ZIP and close REAPER if it is open:
    * Click **Color management > Load color set from file**.
    * Select `Mac-Reapertips.SWSColor` (macOS) or `Win-Reapertips.SWSColor` (Windows) from the `ColorSets/Reapertips` folder.
 4. *(Optional)* Right-click the **Metronome** icon in the transport bar to switch between any of the 66 bundled click sounds in `Data/Metronome Sounds/`.
+5. *(Optional)* In **Preferences > MIDI Editor**, customize your default colormap from `Data/colormaps/` (or switch note coloring in the MIDI editor via **View > Color notes by**).
 
 ---
 
