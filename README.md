@@ -1,74 +1,85 @@
-# My REAPER / Reapertips Configuration
+# 🎛️ REAPER + Reapertips Configuration
 
-Reproducible personal setup for **Windows x64** and **macOS Intel/Apple Silicon**. Created from fine-tuned settings applied on September 9–10, 2026.
+[![Build & Release Packages](https://github.com/ahobbit/reaper-config/actions/workflows/build-release.yml/badge.svg)](https://github.com/ahobbit/reaper-config/actions/workflows/build-release.yml)
+[![Latest Release](https://img.shields.io/github/v/release/ahobbit/reaper-config?label=Latest%20Release&color=success)](https://github.com/ahobbit/reaper-config/releases/latest)
+![Platform](https://img.shields.io/badge/Platform-Windows%20x64%20%7C%20macOS-blue)
 
-Repository: [https://github.com/ahobbit/reaper-config](https://github.com/ahobbit/reaper-config)
+A fine-tuned, reproducible REAPER setup designed for a clean and efficient production workflow. It combines the **Reapertips theme** with optimized project defaults, custom color palettes, responsive meters, automatic project backups, and 1-click installation for both **Windows x64** and **macOS** (Apple Silicon & Intel).
 
-## What Git Tracks
+---
 
-- `common/`: toolbars, actions, mouse modifiers, ReaPack repositories, scripts/effects, and shared assets.
-- `platforms/windows/`: adaptable preferences, Windows palettes, and PowerShell installer.
-- `platforms/macos/`: Mac preferences, Mac palettes, and `.command` restore script.
-- `fonts/`: theme typography.
-- `dependencies.lock.json`: pinned versions, official download URLs, and SHA-256 hashes for each installer/extension.
-- `docs/`: compatibility notes and decision history.
-- `scripts/build.py`: packages standalone handoff folders/ZIPs for transfer to another machine.
+## ✨ Features & Highlights
 
-All six Reapertips theme variants and their icons are tracked in Git to ensure an exact visual restore. Stock themes are sourced directly from the REAPER installer. Installers, generated ZIP archives, project recordings, peak caches, and license keys are excluded via `.gitignore`. Third-party assets retain their original authorship; this is a personal configuration repository.
+* **🎨 Complete Reapertips Suite:** Theme version 1.93b plus all 5 official variants (Dark, Light, Hybrid, Green, Purple) with matched typography (Fira Sans & Roboto Bold).
+* **🌈 Custom Color Management:** Floating color toolbar with 12 pre-configured color palettes for fast track and item organization.
+* **⚡ Smooth Performance & Editing:**
+  * Mouse-centered horizontal and vertical zoom.
+  * 30 Hz responsive meters with 40 dB/s decay rate.
+  * 600 ms / 50% media buffer and 1024-sample render block for stability.
+  * Unified MIDI editor with linked selection.
+  * 24 px track spacers and clean folder indentation.
+* **🛡️ Zero-Loss Project Backups:** Auto-saves every minute when not recording (up to 50 versions per project) into dedicated backup folders.
+* **🔌 Essential Extensions Pre-bundled:** Includes **ReaPack 1.2.6** (with community repositories) and **SWS 2.14.0.7**.
 
-## Installation (Quick & Easy)
+---
 
-You do **not** need to install Python or run any build commands. Ready-to-use packages are built and released automatically by GitHub Actions on every update:
+## 🚀 Quick Install (No Technical Setup Required)
 
-1. Go to the [Releases page](https://github.com/ahobbit/reaper-config/releases).
-2. Download `REAPER-Reapertips-windows.zip` (for Windows) or `REAPER-Reapertips-macos.zip` (for Mac).
-3. Extract the ZIP and follow the instructions in `README-FIRST.txt`:
-   - **Windows:** Double-click `02-APPLY-CONFIGURATION.cmd`.
-   - **macOS:** Double-click `Apply-configuration.command`.
+You don't need Python, Git, or terminal commands to install this configuration. Pre-packaged bundles are built automatically in the cloud.
 
-The installer scripts automatically back up your existing setup, adapt paths to your user account, verify file hashes, and apply the configuration.
+### 1. Download
+Go to the **[Latest Release](https://github.com/ahobbit/reaper-config/releases/latest)** and download the ZIP for your operating system:
+* **Windows:** `REAPER-Reapertips-windows.zip`
+* **macOS:** `REAPER-Reapertips-macos.zip`
 
-[See compatibility details and verification boundaries](docs/COMPATIBILITY.md).
+### 2. Run the Installer
+Extract the ZIP and close REAPER if it is open:
+* **On Windows:** Double-click `02-APPLY-CONFIGURATION.cmd`
+* **On macOS:** Double-click `Apply-configuration.command`
 
-## Building Locally (Optional)
+> [!NOTE]
+> The installer script safely creates a backup of any existing REAPER settings before applying anything, checks that REAPER 7.79+ is present (downloading the official installer if needed), and verifies the SHA-256 integrity of all files.
 
-If you prefer to package bundles manually from source instead of using GitHub Releases, Python 3.9+ is required on the packaging machine:
+### 3. Final Step in REAPER
+1. Open REAPER.
+2. Configure your audio interface and MIDI devices in **Preferences > Audio > Device**.
+3. On the **Reapertips Colors** toolbar:
+   * Click **Color management > Load color set from file**.
+   * Select `Mac-Reapertips.SWSColor` (macOS) or `Win-Reapertips.SWSColor` (Windows) from the `ColorSets/Reapertips` folder.
 
-```sh
-python3 scripts/build.py all --download
-# To bundle the official REAPER installer (no internet required on target machine):
-python3 scripts/build.py all --download --offline
+---
+
+## 📁 Repository Structure
+
+```text
+├── common/              # Shared assets: themes, scripts, menus, actions, ReaPack config
+├── platforms/
+│   ├── macos/           # macOS-specific reaper.ini, palettes, and restore script
+│   └── windows/         # Windows-specific reaper.ini, palettes, and restore script
+├── fonts/               # Theme fonts (Fira Sans & Roboto)
+├── docs/                # Compatibility notes and changelog
+├── dependencies.lock.json # Pinned official download URLs and SHA-256 hashes
+└── .github/workflows/   # Automated CI/CD pipeline that builds ZIP releases
 ```
 
-If `dist/REAPER-Reapertips-windows` or `dist/REAPER-Reapertips-macos` already exist, move them aside before rebuilding (the script prevents accidental overwrites).
-- `--offline` bundles the official REAPER installer inside the package. Without this flag, the target install script downloads it only if missing or outdated.
-- `--download` downloads missing pinned installers and validates their SHA-256 hashes without installing or executing anything.
+---
 
-## Maintaining Configuration History
+## 🛠️ Making Changes & Updating
 
-After modifying settings inside REAPER, close the application so it writes its preferences to disk. Compare the relevant setting against versioned files and commit only intended changes. Do not blindly copy the entire resource directory, as it contains machine-specific paths, active audio devices, peak caches, and window states.
+Everything is automated through GitHub Actions:
 
-```sh
-git diff
-git add common platforms docs dependencies.lock.json
-git commit -m "Describe the setting change and reason"
-```
+1. **Tweak your setup:** Adjust settings in REAPER, then close it to save.
+2. **Commit your changes:**
+   ```sh
+   git add common platforms
+   git commit -m "Describe your adjustment"
+   git push origin main
+   ```
+3. **Automatic Release:** In ~20 seconds, GitHub Actions runs integrity checks, packages the new Windows and macOS ZIPs, and updates the **[Latest Release](https://github.com/ahobbit/reaper-config/releases/latest)** automatically.
 
-Update [docs/CHANGELOG.md](docs/CHANGELOG.md) with details and verification steps. For binary assets, replace the file and document the version. For installers, update the URL and SHA-256 in `dependencies.lock.json`. Future changes in REAPER are **not automatically synchronized** with Git.
+---
 
-To inspect a previous version without affecting your local REAPER install:
-```sh
-git show v1.0.0:platforms/windows/reaper.ini
-```
-Checking out a Git commit does not alter your live REAPER installation; generate and run the appropriate platform script with REAPER closed to apply changes.
+## 📖 Additional Documentation
 
-## Automatic REAPER Verification & Bootstrap
-
-The installer scripts verify the system's standard installation:
-- They download **the exact version pinned in the lockfile**, preserving environment reproducibility.
-- They check SHA-256 hashes before executing any installer.
-- They preserve any installed version that is equal to or newer than the required version.
-- On Windows, the interactive official installer is launched.
-- On macOS, the official DMG is mounted and the app bundle is copied (with automatic backup of any existing version). System security prompts are respected.
-
-To bump REAPER to a newer version, update the URL, SHA-256 hash, and version in `dependencies.lock.json`. On macOS, update the helper script and hash in tandem (the test suite verifies consistency). Portable and non-standard installation directories require manual setup.
+* **[Compatibility Matrix](docs/COMPATIBILITY.md):** Detailed breakdown of differences between Windows and macOS settings.
+* **[Changelog](docs/CHANGELOG.md):** Version history and feature log.
